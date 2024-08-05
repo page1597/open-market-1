@@ -18,6 +18,14 @@
   flex-direction: row;
   border-radius: 10px;
 }
+.select-usertype-buttons button {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+}
+.select-usertype-buttons button.active {
+  background-color: var(--white-color);
+  border-bottom-color: var(--white-color);
+}
 button {
   text-align: center;
   padding: 20px 0;
@@ -26,16 +34,15 @@ button {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
-button#buyer,
-button#seller {
-  flex-grow: 1;
-  border: 1px solid var(--border-color);
-}
 
 .login-form {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  padding: 14px 35px;
+  padding-bottom: 36px;
+  border-radius: 0 0 10px 10px;
 }
 input {
   padding: 20px 0;
@@ -44,8 +51,15 @@ input {
   align-items: center;
   border-bottom: 1px solid var(--border-color);
 }
+.error-message {
+  display: none;
+  color: var(--error-color);
+  margin-top: 26px;
+  margin-bottom: -10px;
+  text-align: left;
+}
 
-button#login {
+.login-form button {
   background-color: var(--primary-color);
   border-radius: 5px;
   color: var(--white-color);
