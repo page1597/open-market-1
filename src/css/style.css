@@ -1,0 +1,10 @@
+@import url("reset.css");
+
+/* css 변수 */
+:root {
+  --primary-color: #21bf48;
+  --border-color: #c4c4c4;
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --text-color: ##333333;
+}

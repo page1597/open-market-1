@@ -1,0 +1,71 @@
+@import url("style.css");
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  margin-top: 10vh;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 70px;
+}
+.select-usertype-buttons {
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+}
+button {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+button#buyer,
+button#seller {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+input {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+button#login {
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: var(--white-color);
+  font-weight: 700;
+  margin-top: 36px;
+}
+.link-container {
+  margin-top: 30px;
+  padding: 10px;
+}
+.link-container ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.link-container a {
+  padding: 10px 15px;
+}
