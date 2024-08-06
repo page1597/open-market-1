@@ -7,47 +7,29 @@
     <link rel="stylesheet" href="./src/css/main.css" />
   </head>
   <body>
-    <header>
-      <div class="header-logo-search">
-        <img
-          src="./public/assets/Logo-hodu.png"
-          width="124"
-          height="38"
-          alt="HODU 메인페이지로 이동"
-        />
-        <label for="serach" class="sr-only">상품 검색</label>
-        <input
-          id="search"
-          class="search"
-          name="search"
-          type="text"
-          placeholder="상품을 검색해보세요!"
-        />
-      </div>
-      <nav class="user-navbar">
-        <ul>
-          <li class="cart">
-            <a href="/cart.html">장바구니</a>
-          </li>
-          <li class="login">
-            <a href="/login.html">로그인</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <header></header>
     <main>
       <h1 class="sr-only">HODU</h1>
-      <article class="banner">메인 배너 위치</article>
-      <section class="product-list">
-        <h2 class="sr-only">상품 목록</h2>
-        <ol>
-          <!-- 상품 목록 -->
-          <!-- 상품 목록 위치 -->
-          <!-- <li></li> -->
-        </ol>
-      </section>
+      <div class="main-inner">
+        <article class="banner"></article>
+        <section class="product-list">
+          <h2 class="sr-only">상품 목록</h2>
+          <ol>
+            <!-- 상품 목록 -->
+            <!-- <li></li> -->
+          </ol>
+          <nav class="pagination">
+            <ul>
+              <li><button id="prev">이전</button></li>
+              <!-- 페이지네이션 버튼 -->
+              <li><button id="next">다음</button></li>
+            </ul>
+          </nav>
+        </section>
+      </div>
     </main>
     <!-- <a href="/login.html">로그인하기</a> -->
+    <footer></footer>
     <script src="./src/js/main.js"></script>
   </body>
 </html>
