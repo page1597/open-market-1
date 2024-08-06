@@ -61,11 +61,19 @@
   font-size: 18px;
   font-weight: 400;
 }
-.product-list .product-price {
-  margin-top: 10px;
+.product-list .product-price em {
   font-weight: 700;
   color: var(--black-color);
   font-size: 24px;
+}
+.product-list .product-price {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 10px;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 16px;
+  font-weight: 400;
 }
 .pagination ul {
   font-weight: 400;

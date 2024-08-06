@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 정보</title>
+    <link rel="stylesheet" href="./src/css/product.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section>
+        <h2 class="sr-only">{상품 이름}</h2>
+        <figure>
+          <img class="product-image" src="{이미지}" alt="{상품 이름}" />
+          <figcaption class="sr-only">{상품 이름}</figcaption>
+        </figure>
+        <div class="product-detail">
+          <div class="product-info">
+            <p class="store-name"></p>
+            <h3 class="product-name">{상품 이름}</h3>
+            <p class="product-price"><em>{상품 가격}</em>원</p>
+          </div>
+
+          <div class="purchase-info">
+            <p class="delivery-info">택배배송 / 무료배송</p>
+            <hr />
+            <div class="quantity-change-button">
+              <button type="button" id="minus">
+                <img
+                  src="./public/assets/icon-minus-line.svg"
+                  alt="수량 1 줄이기"
+                />
+              </button>
+              <input
+                value="1"
+                min="1"
+                max="100"
+                type="number"
+                class="quantity-change-input"
+              />
+              <button type="button" id="plus">
+                <img
+                  src="./public/assets/icon-plus-line.svg"
+                  alt="수량 1 늘리기"
+                />
+              </button>
+            </div>
+
+            <hr />
+            <p class="total-amount">
+              <span class="total-label">총 상품 금액</span>
+              <span>
+                <span class="total-quantity">총 수량&nbsp;<em>1</em>개</span>
+                |
+                <span class="total-price"><em>{총 가격}</em>원</span>
+              </span>
+            </p>
+
+            <div class="purchase-actions">
+              <button type="button" class="buy-now">바로 구매</button>
+              <button type="button" class="add-to-cart">장바구니</button>
+            </div>
+          </div>
+        </div>
+        <!-- 수량 선택 -->
+      </section>
+    </main>
+    <footer></footer>
+    <script src="./src/js/product.js"></script>
+  </body>
+</html>

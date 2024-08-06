@@ -125,7 +125,6 @@ const displayProducts = async function () {
   try {
     const productList = await fetchProducts();
     console.log(productList);
-    // productList
     productList.forEach((product) => {
       createProductCard(product);
     });
@@ -141,7 +140,7 @@ const createProductCard = (product) => {
   $li.id = product.product_id;
 
   const $productLink = document.createElement("a");
-  $productLink.href = `/${product.product_id}`;
+  $productLink.href = `/product?id=${product.product_id}`;
 
   const $img = document.createElement("img");
   $img.src = product.image;
@@ -160,7 +159,10 @@ const createProductCard = (product) => {
 
   $storeName.textContent = product.store_name;
   $productName.textContent = product.product_name;
-  $productPrice.textContent = product.price;
+
+  const formatter = new Intl.NumberFormat("ko-KR");
+
+  $productPrice.innerHTML = `<em>${formatter.format(product.price)}</em>원`;
 
   $li.appendChild($productLink);
   $li.appendChild($storeName);
