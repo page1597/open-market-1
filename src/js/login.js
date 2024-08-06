@@ -1,4 +1,4 @@
-const url = "https://openmarket.weniv.co.kr/";
+const baseUrl = "https://openmarket.weniv.co.kr";
 
 document.addEventListener("DOMContentLoaded", () => {
   const $form = document.getElementById("login-form");
@@ -56,7 +56,7 @@ const login = async (id, password, loginType) => {
   const $errorMessage = document.getElementById("error-message");
   const $passwordInput = document.getElementById("password");
   try {
-    const res = await fetch(`${url}/accounts/login/`, {
+    const res = await fetch(`${baseUrl}/accounts/login/`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

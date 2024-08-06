@@ -1,8 +1,25 @@
-const url = "https://openmarket.weniv.co.kr/";
+const baseUrl = "https://openmarket.weniv.co.kr";
 
+// 헤더 불러오기
+const addHeader = () => {
+  fetch("header.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.querySelector("header").outerHTML = data;
+    });
+};
+
+const addFooter = () => {
+  fetch("footer.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.querySelector("footer").outerHTML = data;
+    });
+};
+// 페이지 이동 -> 해당 주소로
 document.addEventListener("DOMContentLoaded", () => {
-  const $productList = document.querySelector("product-list");
-  console.log($productList);
+  addHeader();
+  addFooter();
   displayProducts();
 });
 
@@ -81,10 +98,16 @@ const createPaginationButtons = (totalPages) => {
 
 // 상품 불러오기
 const fetchProducts = async () => {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  const page = params.get("page") || 1;
+
   try {
-    const res = await fetch(`${url}/products/`);
+    const res = await fetch(`${baseUrl}/products/?page=${page}`);
     if (res.ok) {
       const json = await res.json();
+      console.log(json);
+      createPaginationButtons(Math.ceil(json.count / 15));
       return json.results;
     } else {
       return null;
@@ -95,12 +118,14 @@ const fetchProducts = async () => {
   }
 };
 
-fetchProducts();
+const displayProducts = async function () {
+  const $productList = document.querySelector(".product-list ol");
+  $productList.innerHTML = "";
 
-const initProducts = async function () {
   try {
     const productList = await fetchProducts();
     console.log(productList);
+    // productList
     productList.forEach((product) => {
       createProductCard(product);
     });
@@ -109,10 +134,9 @@ const initProducts = async function () {
   }
 };
 
-initProducts();
-
 const createProductCard = (product) => {
   const $productList = document.querySelector(".product-list ol");
+
   const $li = document.createElement("li");
   $li.id = product.product_id;
 
@@ -122,8 +146,6 @@ const createProductCard = (product) => {
   const $img = document.createElement("img");
   $img.src = product.image;
   $img.alt = product.product_name;
-  //   $img.width = 380;
-  //   $img.height = 380;
 
   $productLink.appendChild($img);
 
