@@ -70,6 +70,15 @@ input.search::placeholder {
   color: var(--gray-text-color);
   gap: 4px;
 }
+
+.user-navbar .cart a.active-button::before {
+  background-image: url("../../public/assets/icon-shopping-cart-2.svg");
+}
+
+.active-button {
+  color: var(--primary-color);
+}
+
 /* @media (max-width: 1440px) {
   header {
     padding: 20px 120px;

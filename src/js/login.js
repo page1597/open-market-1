@@ -71,10 +71,12 @@ const login = async (id, password, loginType) => {
     console.log(json);
 
     if (res.ok) {
-      console.log("로그인 성공:", json);
       $errorMessage.style.display = "none";
       // token 저장
+      localStorage.setItem("token", json.token);
+
       window.location.href = "/";
+
       return true;
     } else {
       console.error("로그인 실패:", json);

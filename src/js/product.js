@@ -9,6 +9,10 @@ const addHeader = () => {
     .then((response) => response.text())
     .then((data) => {
       document.querySelector("header").outerHTML = data;
+
+      const script = document.createElement("script");
+      script.src = "/src/js/header.js";
+      document.body.appendChild(script);
     });
 };
 
@@ -31,6 +35,7 @@ const displayProduct = async function () {
     product = await fetchProduct();
     console.log(product);
     createProductDetailCard(product);
+    createButtons(product);
   } catch (e) {
     console.log(e);
   }
@@ -79,6 +84,52 @@ const createProductDetailCard = (product) => {
     product.price * quantity
   );
   document.createElement("span").textContent = product.product_name;
+};
+
+const addToCart = async (product) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.error("인증된 사용자가 아님. 토큰 없음");
+    return;
+  }
+  try {
+    const res = await fetch(`${baseUrl}/cart/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${token}`,
+      },
+      body: JSON.stringify({
+        product_id: product.product_id,
+        quantity: quantity,
+        check: true,
+      }),
+    });
+
+    if (res.ok) {
+      const json = await res.json();
+      console.log(json);
+      return json;
+    } else {
+      const errorJson = await res.json();
+      console.error("장바구니 넣기 실패:", errorJson);
+      return null;
+    }
+  } catch (error) {
+    console.error("장바구니 넣기 오류:", error);
+    return null;
+  }
+};
+
+const createButtons = (product) => {
+  // 장바구니 추가 버튼
+  const $addToCartButton = document.querySelector("#add-to-cart");
+  $addToCartButton.addEventListener("click", async () => {
+    addToCart(product);
+    // TODO: 완료 모달창 등 띄우기
+  });
+
+  // TODO: 구매하기 버튼 구현
 };
 
 const createQuantityInput = () => {

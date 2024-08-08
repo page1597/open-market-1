@@ -6,6 +6,10 @@ const addHeader = () => {
     .then((response) => response.text())
     .then((data) => {
       document.querySelector("header").outerHTML = data;
+
+      const script = document.createElement("script");
+      script.src = "/src/js/header.js";
+      document.body.appendChild(script);
     });
 };
 
@@ -18,6 +22,7 @@ const addFooter = () => {
 };
 // 페이지 이동 -> 해당 주소로
 document.addEventListener("DOMContentLoaded", () => {
+  // document.querySelector(".user-navbar .login a").textContent = "마이페이지";
   addHeader();
   addFooter();
   displayProducts();
