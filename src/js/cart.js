@@ -36,7 +36,11 @@ const displayCart = async () => {
     console.log(cart.results);
     for (const cartProduct of cart.results) {
       const product = await fetchCartProductDetail(cartProduct.product_id);
-      const $cartItem = createCartItemCard(product, cartProduct.quantity);
+      const $cartItem = createCartItemCard(
+        product,
+        cartProduct.quantity,
+        cartProduct.cart_item_id
+      );
       document.querySelector(".cart-items-container").appendChild($cartItem);
     }
   } catch (e) {
@@ -59,13 +63,14 @@ const fetchCartProductDetail = async (id) => {
   }
 };
 
-const createCartItemCard = (product, quantity) => {
+const createCartItemCard = (product, quantity, cartItemId) => {
   const $cartItem = document.createElement("article");
   $cartItem.className = "cart-item";
   const formatter = new Intl.NumberFormat("ko-KR");
 
   $cartItem.innerHTML = `
     <div>
+      <button type="button" id="remove-${product.product_id}">삭제</button>
       <input type="checkbox" id="select-${
         product.product_id
       }" aria-label="개별 상품 선택" />
@@ -125,6 +130,15 @@ const createCartItemCard = (product, quantity) => {
   const $selectCheckbox = $cartItem.querySelector(
     `#select-${product.product_id}`
   );
+
+  const $removeButton = $cartItem.querySelector(
+    `#remove-${product.product_id}`
+  );
+
+  $removeButton.addEventListener("click", () => {
+    console.log("remove ");
+    removeProductFromCart(cartItemId);
+  });
 
   const updateTotalPrice = (newQuantity) => {
     $quantityInput.value = newQuantity;
@@ -195,6 +209,58 @@ const createCartItemCard = (product, quantity) => {
   $selectCheckbox.addEventListener("input", updateOrderProducts);
 
   return $cartItem;
+};
+
+const removeProductFromCart = async (cartItemId) => {
+  // 삭제 확인 모달창을 띄우는 코드를 작성해줘
+  const removeConfirmModal = document.createElement("article");
+  removeConfirmModal.className = "remove-confirm-modal";
+  removeConfirmModal.innerHTML = `
+    <div class="modal-content">
+      <p>상품을 삭제하시겠습니까?</p>
+      <div class="modal-button-container">
+        <button id="cancel" class="modal-button">취소</button>
+        <button id="confirm" class="modal-button">확인</button>
+        </div>
+    </div>
+  `;
+  document.body.appendChild(removeConfirmModal);
+
+  return new Promise((resolve) => {
+    // 모달창에서 버튼 클릭 시 이벤트 처리
+    document.getElementById("confirm").addEventListener("click", async () => {
+      removeConfirmModal.remove(); // 모달창 제거
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("인증된 사용자가 아님. 토큰 없음");
+        return null;
+      }
+      try {
+        const res = await fetch(`${baseUrl}/cart/${cartItemId}`, {
+          headers: { Authorization: `JWT ${token}` },
+          method: "DELETE",
+        });
+        console.log(res);
+        if (res.ok) {
+          alert("삭제되었습니다.");
+          window.location.reload();
+          resolve(true);
+        } else {
+          alert("삭제 실패. 다시 시도해주세요.");
+          resolve(false);
+        }
+        resolve(true);
+      } catch (error) {
+        console.error(error);
+        resolve(false); // 삭제 실패 시 false 반환
+      }
+    });
+
+    document.getElementById("cancel").addEventListener("click", () => {
+      removeConfirmModal.remove(); // 모달창 제거
+      resolve(false); // 취소 시 false 반환
+    });
+  });
 };
 
 const fetchCart = async () => {

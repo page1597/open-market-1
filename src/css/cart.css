@@ -141,3 +141,46 @@ section.total-count {
 .total-price .value {
   color: var(--error-color);
 }
+.remove-confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  z-index: 1000;
+  width: 360px;
+  height: 200px;
+  border: 1px solid #c4c4c4;
+}
+.modal-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 400;
+}
+.modal-button-container {
+  margin-top: 40px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.modal-button {
+  border: 1px solid #c4c4c4;
+  padding: 10px 34.25px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.modal-button#cancel {
+  background: var(--white-color);
+  color: var(--gray-text-color);
+}
+.modal-button#confirm {
+  background: var(--primary-color);
+  color: var(--white-color);
+}
