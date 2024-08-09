@@ -68,7 +68,7 @@ const logout = async () => {
     console.log(res);
     localStorage.removeItem("token");
     alert("로그아웃 되었습니다.");
-    window.location.reload();
+    window.location.href = "/";
   } catch (e) {
     console.error("로그아웃 실패", e);
   }
