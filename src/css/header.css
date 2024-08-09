@@ -35,7 +35,7 @@ input.search::placeholder {
   gap: 26px;
 }
 
-.user-navbar .cart a,
+.user-navbar .cart .cart,
 .user-navbar .user .user-button {
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@ input.search::placeholder {
   gap: 4px;
   background: none;
 }
-.user-navbar .cart a::before,
+.user-navbar .cart .cart::before,
 .user-navbar .user .user-button::before {
   content: "";
   display: block;
@@ -54,7 +54,7 @@ input.search::placeholder {
   background-repeat: no-repeat;
 }
 
-.user-navbar .cart a::before {
+.user-navbar .cart .cart::before {
   margin-left: -6px;
   background-image: url("../../public/assets/icon-shopping-cart.svg");
 }
@@ -72,7 +72,7 @@ input.search::placeholder {
   gap: 4px;
 }
 
-.user-navbar .cart a.active-button::before {
+.user-navbar .cart .cart.active-button::before {
   background-image: url("../../public/assets/icon-shopping-cart-2.svg");
 }
 .user-navbar .user .user-button.active-button::before {

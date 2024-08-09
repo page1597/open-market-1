@@ -1,10 +1,17 @@
-const $cartLink = document.querySelector(".user-navbar .cart a");
+const $cartButton = document.querySelector(".user-navbar .cart button");
 const $userButton = document.querySelector(".user-navbar .user button");
 const currentPage = window.location.pathname;
-console.log(currentPage, $cartLink);
 
+$cartButton.addEventListener("click", () => {
+  if (localStorage.getItem("token")) {
+    window.location.href = "./cart.html";
+  } else {
+    alert("로그인 후 이용가능합니다.");
+    window.location.href = "./login.html";
+  }
+});
 if (currentPage === "/cart.html") {
-  $cartLink.classList.add("active-button");
+  $cartButton.classList.add("active-button");
 }
 const onOpenDropdown = () => {
   $dropdownMenu.style.display =
