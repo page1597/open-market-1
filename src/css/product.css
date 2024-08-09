@@ -127,3 +127,6 @@ img.product-image {
   flex-grow: 1;
   background-color: var(--gray-text-color);
 }
+.quantity-change-button button:disabled {
+  background: var(--gray-background-color);
+}

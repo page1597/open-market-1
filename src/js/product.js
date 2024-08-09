@@ -62,8 +62,7 @@ const fetchProduct = async () => {
 };
 
 const createProductDetailCard = (product) => {
-  createQuantityInput();
-  createQuantityButton(quantity);
+  createQuantityControl(product.stock, product.price);
 
   document.querySelector("h2").textContent = product.product_name;
   document.querySelector("figcaption").textContent = product.product_name;
@@ -109,6 +108,7 @@ const addToCart = async (product) => {
     if (res.ok) {
       const json = await res.json();
       console.log(json);
+      alert("장바구니에 담았습니다.");
       return json;
     } else {
       const errorJson = await res.json();
@@ -132,38 +132,6 @@ const createButtons = (product) => {
   // TODO: 구매하기 버튼 구현
 };
 
-const createQuantityInput = () => {
-  const $input = document.querySelector(".quantity-change-input");
-
-  $input.addEventListener("input", (e) => {
-    let value = e.target.value;
-
-    if (value.length > 2) {
-      e.target.value = value.slice(0, 2);
-    }
-    if (e.target.value.startsWith("0")) {
-      e.target.value = parseInt(e.target.value, 10);
-    }
-    quantity = parseInt(e.target.value, 10) || 1;
-    updateQuantityDisplay();
-  });
-};
-const createQuantityButton = () => {
-  const $minusButton = document.querySelector("#minus");
-  const $plusButton = document.querySelector("#plus");
-
-  $minusButton.addEventListener("click", () => {
-    if (quantity > 1) {
-      quantity -= 1;
-      updateQuantityDisplay();
-    }
-  });
-
-  $plusButton.addEventListener("click", () => {
-    quantity += 1;
-    updateQuantityDisplay();
-  });
-};
 const updateQuantityDisplay = () => {
   const $input = document.querySelector(".quantity-change-input");
   $input.value = quantity;
@@ -173,4 +141,50 @@ const updateQuantityDisplay = () => {
   document.querySelector(".total-price em").textContent = formatter.format(
     product.price * quantity
   );
+};
+
+const createQuantityControl = (productStock, productPrice) => {
+  const $input = document.querySelector(".quantity-change-input");
+  const $minusButton = document.querySelector("#minus");
+  const $plusButton = document.querySelector("#plus");
+  const $totalQuantity = document.querySelector(".total-quantity em");
+  const $totalPrice = document.querySelector(".total-price em");
+  let quantity = 1;
+
+  const formatter = new Intl.NumberFormat("ko-KR");
+
+  const updateQuantityDisplay = () => {
+    $input.value = quantity;
+    $totalQuantity.textContent = quantity;
+    $totalPrice.textContent = formatter.format(productPrice * quantity);
+    $minusButton.disabled = quantity <= 1;
+    $plusButton.disabled = quantity >= productStock;
+  };
+
+  $input.addEventListener("input", (e) => {
+    let newValue = parseInt(e.target.value, 10) || 1;
+    if (e.target.value.startsWith("0")) {
+      newValue = parseInt(e.target.value, 10);
+    }
+    if (newValue > productStock) {
+      alert("상품 재고를 초과하였습니다.");
+      newValue = productStock;
+    }
+    quantity = newValue;
+    updateQuantityDisplay();
+  });
+  $minusButton.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity--;
+      updateQuantityDisplay();
+    }
+  });
+
+  $plusButton.addEventListener("click", () => {
+    if (quantity < productStock) {
+      quantity++;
+      updateQuantityDisplay();
+    }
+  });
+  updateQuantityDisplay();
 };
