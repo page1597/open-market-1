@@ -7,9 +7,7 @@ h2 {
   text-align: center;
   margin-top: 54px;
 }
-/* .cart-item {
-  margin-top: 10px;
-} */
+
 .cart-products {
   width: 1020px;
   margin: 52px auto;
@@ -17,7 +15,7 @@ h2 {
 .cart-product-header {
   background: var(--gray-background-color);
   display: grid;
-  grid-template-columns: 50px 1fr 150px 200px;
+  grid-template-columns: 70px 1fr 150px 200px;
   align-items: center;
   text-align: center;
   margin-bottom: 35px;
@@ -34,6 +32,61 @@ input#select-all {
   border: 2px solid var(--primary-color);
   border-radius: 50%;
 }
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-container {
+  position: relative;
+  display: inline-block;
+}
+
+.checkbox-container label {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  /* left: 10px; */
+}
+
+.checkbox-container label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary-color);
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::before {
+  background-color: var(--white-color);
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::after {
+  content: url("../../public/assets/check-box-circle.svg");
+  position: absolute;
+  left: 4px;
+  top: 1.5px;
+  color: var(--white-color);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
 .cart-item {
   border: 2px solid #e0e0e0;
   border-radius: 10px;
@@ -81,7 +134,7 @@ input#select-all {
 }
 article.cart-item {
   display: grid;
-  grid-template-columns: 50px 1fr 150px 200px;
+  grid-template-columns: 70px 1fr 150px 200px;
   align-items: center;
   text-align: center;
   margin-top: 10px;

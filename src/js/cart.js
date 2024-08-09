@@ -86,12 +86,14 @@ const createCartItemCard = (product, quantity, cartItemId) => {
       <button type="button" class="remove" id="remove-${
         product.product_id
       }"></button>
-      <input type="checkbox" id="select-${
-        product.product_id
-      }" aria-label="개별 상품 선택" />
-      <label class="sr-only" for="select-${
-        product.product_id
-      }">개별 상품 선택</label>
+      <div class="checkbox-container">
+        <input type="checkbox" id="select-${
+          product.product_id
+        }" aria-label="개별 상품 선택"/>
+        <label for="select-${
+          product.product_id
+        }"><span class="sr-only">개별 상품 선택</span></label>
+      </div>
     </div>
     <div class="product-detail">
       <figure>
