@@ -1,4 +1,5 @@
 const baseUrl = "https://openmarket.weniv.co.kr";
+let finalOrderProducts = [];
 
 // 헤더 불러오기
 const addHeader = () => {
@@ -27,8 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   addFooter();
   displayCart();
 });
-
-let finalOrderProducts = [];
 
 const displayCart = async () => {
   try {
@@ -239,16 +238,23 @@ const createQuantityChangeModal = (product, cartItemId) => {
     `#modal-plus-${product.product_id}`
   );
 
+  $modalMinusButton.disabled = quantity <= 1;
+  $modalPlusButton.disabled = quantity >= product.stock;
+
   $modalMinusButton.addEventListener("click", () => {
     if (quantity > 1) {
-      quantity -= 1;
+      quantity--;
       $modalQuantityInput.value = quantity;
     }
+    $modalMinusButton.disabled = quantity <= 1;
+    $modalPlusButton.disabled = quantity >= product.stock;
   });
 
   $modalPlusButton.addEventListener("click", () => {
-    quantity += 1;
+    quantity++;
     $modalQuantityInput.value = quantity;
+    $modalMinusButton.disabled = quantity <= 1;
+    $modalPlusButton.disabled = quantity >= product.stock;
   });
 
   $modalQuantityInput.addEventListener("input", (e) => {

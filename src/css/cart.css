@@ -212,3 +212,6 @@ button.remove::before {
   background-size: contain;
   background-repeat: no-repeat;
 }
+.modal-content .quantity-change-button button:disabled {
+  background: var(--gray-background-color);
+}
