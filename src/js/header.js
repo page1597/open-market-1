@@ -39,7 +39,6 @@ if (!localStorage.getItem("token")) {
 const $dropdownMenu = document.querySelector(".dropdown-menu");
 
 const $logoutButton = document.querySelector("#logout");
-console.log($logoutButton);
 $logoutButton.addEventListener("click", () => {
   logout();
 });

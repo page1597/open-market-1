@@ -14,7 +14,7 @@ const addHeader = () => {
       document.body.appendChild(script);
     });
 };
-
+// 푸터 불러오기
 const addFooter = () => {
   fetch("footer.html")
     .then((response) => response.text())
@@ -26,8 +26,28 @@ const addFooter = () => {
 document.addEventListener("DOMContentLoaded", () => {
   addHeader();
   addFooter();
+  // 전체 선택 이벤트
+
   displayCart();
 });
+
+// "전체 선택" 체크박스 기능
+const attachSelectAllEventListener = (product) => {
+  const $selectAllCheckbox = document.querySelector("#select-all");
+  $selectAllCheckbox.addEventListener("click", () => {
+    const isChecked = $selectAllCheckbox.checked;
+    const $allCheckboxes = document.querySelectorAll(
+      'input[type="checkbox"]:not(#select-all)'
+    );
+    $allCheckboxes.forEach((checkbox) => {
+      checkbox.checked = isChecked;
+      if (product) {
+        updateOrderProducts(product, isChecked);
+      }
+    });
+    updateTotalCount();
+  });
+};
 
 // 장바구니 화면에 그리기
 const displayCart = async () => {
@@ -39,6 +59,9 @@ const displayCart = async () => {
     for (const cartProduct of cart.results) {
       const product = await fetchCartProductDetail(cartProduct.product_id);
       if (product) {
+        //  전체선택 부분 구현
+        attachSelectAllEventListener(product);
+
         const $cartItem = createCartItemCard(
           product,
           cartProduct.quantity,
@@ -149,6 +172,7 @@ const attachEventListeners = ($cartItem, product, quantity, cartItemId) => {
 
 // 선택 상품 체크
 const updateOrderProducts = (product, isSelected) => {
+  console.log(product);
   const quantity = parseInt(
     document.querySelector(`#quantity-${product.product_id}`).value,
     10
@@ -164,6 +188,7 @@ const updateOrderProducts = (product, isSelected) => {
       shippingFee: product.shipping_fee,
     });
   }
+  console.log(finalOrderProducts);
   updateTotalCount();
 };
 
