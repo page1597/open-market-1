@@ -70,7 +70,9 @@ const createCartItemCard = (product, quantity, cartItemId) => {
 
   $cartItem.innerHTML = `
     <div>
-      <button type="button" id="remove-${product.product_id}">삭제</button>
+      <button type="button" class="remove" id="remove-${
+        product.product_id
+      }"></button>
       <input type="checkbox" id="select-${
         product.product_id
       }" aria-label="개별 상품 선택" />
@@ -102,7 +104,7 @@ const createCartItemCard = (product, quantity, cartItemId) => {
       <button type="button" id="minus-${product.product_id}">
         <img src="./public/assets/icon-minus-line.svg" alt="수량 1 줄이기" />
       </button>
-      <input value="${quantity}" min="1" max="100" type="number" class="quantity-change-input" id="quantity-${
+      <input disabled value="${quantity}" min="1" max="100" type="number" class="quantity-change-input" id="quantity-${
     product.product_id
   }" />
       <button type="button" id="plus-${product.product_id}">
@@ -136,79 +138,182 @@ const createCartItemCard = (product, quantity, cartItemId) => {
   );
 
   $removeButton.addEventListener("click", () => {
-    console.log("remove ");
     removeProductFromCart(cartItemId);
   });
 
-  const updateTotalPrice = (newQuantity) => {
-    $quantityInput.value = newQuantity;
-    $totalPrice.textContent = `${formatter.format(
-      product.price * newQuantity
-    )}원`;
-  };
-
-  const updateOrderProducts = () => {
-    finalOrderProducts = finalOrderProducts.filter(
-      (orderProduct) => orderProduct.id !== product.product_id
-    );
-    if ($selectCheckbox.checked) {
-      finalOrderProducts.push({
-        id: product.product_id,
-        price: parseInt($totalPrice.textContent.replace(/[^0-9]/g, ""), 10),
-        discountPrice: 0,
-        shippingFee: product.shipping_fee,
-      });
-    }
-    updateTotalCount();
-  };
-
-  const updateTotalCount = () => {
-    const $totalCountSection = document.querySelector(".total-count");
-    const $productPrice = $totalCountSection.querySelector(
-      ".product-price .value em"
-    );
-    const $shippingFee = $totalCountSection.querySelector(
-      ".shipping-fee .value em"
-    );
-
-    let finalOrderPrice = 0;
-    let finalShippingFee = 0;
-    finalOrderProducts.forEach((product) => {
-      finalOrderPrice += product.price;
-      finalShippingFee += product.shippingFee;
-    });
-
-    $productPrice.textContent = finalOrderPrice.toLocaleString();
-    $shippingFee.textContent = finalShippingFee.toLocaleString();
-    $totalCountSection.querySelector(".total-price .value em").textContent = (
-      finalOrderPrice + finalShippingFee
-    ).toLocaleString();
-  };
-
   $minusButton.addEventListener("click", () => {
-    if (quantity > 1) {
-      quantity -= 1;
-      updateTotalPrice(quantity);
-      updateOrderProducts();
-    }
+    createQuantityChangeModal(product, cartItemId);
   });
-
   $plusButton.addEventListener("click", () => {
-    quantity += 1;
-    updateTotalPrice(quantity);
-    updateOrderProducts();
+    createQuantityChangeModal(product, cartItemId);
   });
 
-  $quantityInput.addEventListener("input", (e) => {
-    const value = Math.min(Math.max(parseInt(e.target.value, 10) || 1, 1), 100);
-    quantity = value;
-    updateTotalPrice(quantity);
-    updateOrderProducts();
-  });
-
-  $selectCheckbox.addEventListener("input", updateOrderProducts);
+  $selectCheckbox.addEventListener("input", () =>
+    updateOrderProducts(product, $selectCheckbox.checked)
+  );
 
   return $cartItem;
+};
+
+const updateOrderProducts = (product, isSelected) => {
+  // 여기
+  let quantity = parseInt(
+    document.querySelector(`#quantity-${product.product_id}`).value,
+    10
+  );
+  finalOrderProducts = finalOrderProducts.filter(
+    (orderProduct) => orderProduct.id !== product.product_id
+  );
+  if (isSelected) {
+    finalOrderProducts.push({
+      id: product.product_id,
+      price: product.price * quantity,
+      discountPrice: 0,
+      shippingFee: product.shipping_fee,
+    });
+  }
+  console.log(finalOrderProducts);
+  updateTotalCount();
+};
+
+const updateTotalCount = () => {
+  console.log("update total count");
+  const $totalCountSection = document.querySelector(".total-count");
+  const $productPrice = $totalCountSection.querySelector(
+    ".product-price .value em"
+  );
+  const $shippingFee = $totalCountSection.querySelector(
+    ".shipping-fee .value em"
+  );
+  let finalOrderPrice = 0;
+  let finalShippingFee = 0;
+  finalOrderProducts.forEach((product) => {
+    finalOrderPrice += product.price;
+    finalShippingFee += product.shippingFee;
+  });
+  console.log(finalOrderProducts);
+
+  $productPrice.textContent = finalOrderPrice.toLocaleString();
+  $shippingFee.textContent = finalShippingFee.toLocaleString();
+  $totalCountSection.querySelector(".total-price .value em").textContent = (
+    finalOrderPrice + finalShippingFee
+  ).toLocaleString();
+};
+
+const createQuantityChangeModal = (product, cartItemId) => {
+  // 모달 생성
+  const quantityChangeModal = document.createElement("article");
+  let quantity = parseInt(
+    document.querySelector(`#quantity-${product.product_id}`).value,
+    10
+  );
+  const formatter = new Intl.NumberFormat("ko-KR");
+
+  quantityChangeModal.className = "quantity-change-modal";
+  quantityChangeModal.innerHTML = `
+    <div class="modal-content">
+      <div class="quantity-change-button">
+        <button type="button" id="modal-minus-${product.product_id}">
+          <img src="./public/assets/icon-minus-line.svg" alt="수량 1 줄이기" />
+        </button>
+        <input value="${quantity}" min="1" max="100" type="number" class="quantity-change-input" id="modal-quantity-${product.product_id}" />
+        <button type="button" id="modal-plus-${product.product_id}">
+          <img src="./public/assets/icon-plus-line.svg" alt="수량 1 늘리기" />
+        </button>
+      </div>
+      <div class="modal-button-container">
+        <button id="cancel" class="modal-button">취소</button>
+        <button id="confirm" class="modal-button">수정</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(quantityChangeModal);
+
+  const $modalQuantityInput = document.querySelector(
+    `#modal-quantity-${product.product_id}`
+  );
+  const $modalMinusButton = document.querySelector(
+    `#modal-minus-${product.product_id}`
+  );
+  const $modalPlusButton = document.querySelector(
+    `#modal-plus-${product.product_id}`
+  );
+
+  $modalMinusButton.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity -= 1;
+      $modalQuantityInput.value = quantity;
+    }
+  });
+
+  $modalPlusButton.addEventListener("click", () => {
+    quantity += 1;
+    $modalQuantityInput.value = quantity;
+  });
+
+  $modalQuantityInput.addEventListener("input", (e) => {
+    quantity = Math.min(Math.max(parseInt(e.target.value, 10) || 1, 1), 100);
+    $modalQuantityInput.value = quantity;
+  });
+
+  return new Promise((resolve) => {
+    document.getElementById("confirm").addEventListener("click", async () => {
+      quantityChangeModal.remove(); // 모달창 제거
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("인증된 사용자가 아님. 토큰 없음");
+        return null;
+      }
+
+      try {
+        const res = await fetch(`${baseUrl}/cart/${cartItemId}/`, {
+          headers: {
+            Authorization: `JWT ${token}`,
+            "Content-Type": "application/json",
+          },
+          method: "PUT",
+          body: JSON.stringify({
+            product_id: product.product_id,
+            quantity: quantity,
+            is_active: true,
+          }),
+        });
+        console.log(product.product_id, quantity, token);
+        if (res.ok) {
+          alert("수정되었습니다.");
+
+          const isSelected = document.querySelector(
+            `#select-${product.product_id}`
+          ).checked;
+          console.log("isSelected", isSelected);
+
+          // 화면에 수량 변경
+          document.querySelector(`#quantity-${product.product_id}`).value =
+            quantity;
+          updateOrderProducts(product, isSelected);
+          const $totalPrice = document.querySelector(
+            `#total-price-${product.product_id}`
+          );
+          $totalPrice.textContent = `${formatter.format(
+            product.price * quantity
+          )}원`;
+
+          resolve(true);
+        } else {
+          alert("수정 실패. 다시 시도해주세요.");
+          resolve(false);
+        }
+      } catch (error) {
+        console.error(error);
+        resolve(false);
+      }
+    });
+
+    document.getElementById("cancel").addEventListener("click", () => {
+      quantityChangeModal.remove(); // 모달창 제거
+      resolve(false); // 취소 시 false 반환
+    });
+  });
 };
 
 const removeProductFromCart = async (cartItemId) => {
@@ -227,7 +332,6 @@ const removeProductFromCart = async (cartItemId) => {
   document.body.appendChild(removeConfirmModal);
 
   return new Promise((resolve) => {
-    // 모달창에서 버튼 클릭 시 이벤트 처리
     document.getElementById("confirm").addEventListener("click", async () => {
       removeConfirmModal.remove(); // 모달창 제거
       const token = localStorage.getItem("token");
