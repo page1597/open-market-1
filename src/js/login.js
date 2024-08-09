@@ -74,7 +74,7 @@ const login = async (id, password, loginType) => {
       $errorMessage.style.display = "none";
       // token 저장
       localStorage.setItem("token", json.token);
-
+      alert("로그인 되었습니다.");
       window.location.href = "/";
 
       return true;
