@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 정보</title>
+    <link rel="stylesheet" crossorigin href="/open-market-service/assets/product-rv2lZ0aw.css">
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section class="hidden">
+        <h2 class="sr-only"></h2>
+        <figure>
+          <img class="product-image" alt="" />
+          <figcaption class="sr-only"></figcaption>
+        </figure>
+        <div class="product-detail">
+          <div class="product-info">
+            <p class="store-name"></p>
+            <h3 class="product-name"></h3>
+            <p class="product-price"><em></em>원</p>
+          </div>
+
+          <div class="purchase-info">
+            <p class="delivery-info">택배배송 / 무료배송</p>
+            <hr />
+            <div class="quantity-change-button">
+              <button type="button" id="minus">
+                <img
+                  src="data:image/svg+xml,%3csvg%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M0%2010H20'%20stroke='%23C4C4C4'%20stroke-width='2'/%3e%3c/svg%3e"
+                  alt="수량 1 줄이기"
+                />
+              </button>
+              <input
+                value="1"
+                min="1"
+                max="100"
+                type="number"
+                class="quantity-change-input"
+              />
+              <button type="button" id="plus">
+                <img
+                  src="data:image/svg+xml,%3csvg%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M0%209.5H20'%20stroke='%23C4C4C4'%20stroke-width='2'/%3e%3cpath%20d='M10%2020L10%200'%20stroke='%23C4C4C4'%20stroke-width='2'/%3e%3c/svg%3e"
+                  alt="수량 1 늘리기"
+                />
+              </button>
+            </div>
+
+            <hr />
+            <p class="total-amount">
+              <span class="total-label">총 상품 금액</span>
+              <span>
+                <span class="total-quantity">총 수량&nbsp;<em></em>개</span>
+                |
+                <span class="total-price"><em></em>원</span>
+              </span>
+            </p>
+
+            <div class="purchase-actions">
+              <button type="button" id="buy-now" class="buy-now">
+                바로 구매
+              </button>
+              <button type="button" id="add-to-cart" class="add-to-cart">
+                장바구니
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- 수량 선택 -->
+      </section>
+    </main>
+    <footer></footer>
+    <script src="./src/js/product.js"></script>
+  </body>
+</html>

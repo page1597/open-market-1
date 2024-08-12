@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니</title>
+    <link rel="stylesheet" crossorigin href="/open-market-service/assets/cart-B6xP_aYs.css">
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h2>장바구니</h2>
+      <section class="cart-products">
+        <header class="cart-product-header">
+          <div class="checkbox-container">
+            <input type="checkbox" id="select-all" aria-label="전체 선택" />
+            <label for="select-all">
+              <span class="sr-only">전체 선택</span></label
+            >
+          </div>
+          <h3>상품정보</h3>
+          <h3>수량</h3>
+          <h3>상품금액</h3>
+        </header>
+        <div class="cart-items-container">
+          <!-- 개별 상품 카드 -->
+          <!-- <article class="cart-item">
+          <div>
+            <input type="checkbox" id="select" aria-label="개별 상품 선택" />
+            <label class="sr-only" for="select">개별 상품 선택</label>
+          </div>
+          <div class="product-detail">
+            <figure>
+              <img
+                class="product-image"
+                src="./public/assets/icon-img.png"
+                alt="상품 이름"
+              />
+              <figcaption class="sr-only">상품 설명</figcaption>
+            </figure>
+
+            <div class="product-info">
+              <div>
+                <p class="store-name">가게 이름</p>
+                <p class="product-name">상품 이름</p>
+                <p class="product-price">상품 가격</p>
+              </div>
+
+              <p class="delivery-info">택배배송 / 무료배송</p>
+            </div>
+          </div>
+          <div class="quantity-change-button">
+            <button type="button" id="minus">
+              <img
+                src="./public/assets/icon-minus-line.svg"
+                alt="수량 1 줄이기"
+              />
+            </button>
+            <input
+              value="1"
+              min="1"
+              max="100"
+              type="number"
+              class="quantity-change-input"
+            />
+            <button type="button" id="plus">
+              <img
+                src="./public/assets/icon-plus-line.svg"
+                alt="수량 1 늘리기"
+              />
+            </button>
+          </div>
+
+          <div class="total">
+            <p class="total-price">29,000원</p>
+            <button class="order-button" id="order" type="button">
+              주문하기
+            </button>
+          </div>
+        </article> -->
+          <!-- 장바구니 상품 카드 -->
+        </div>
+        <section class="total-count">
+          <div class="product-price">
+            <p class="title">총 상품금액</p>
+            <p class="value"><em>0</em>원</p>
+          </div>
+          <div class="discount">
+            <p class="title">상품 할인</p>
+            <p class="value"><em>0</em>원</p>
+          </div>
+          <div class="shipping-fee">
+            <p class="title">배송비</p>
+            <p class="value"><em>0</em>원</p>
+          </div>
+          <div class="total-price">
+            <p class="title">결제 예정 금액</p>
+            <p class="value"><em>0</em>원</p>
+          </div>
+        </section>
+      </section>
+    </main>
+    <footer></footer>
+    <script src="./src/js/cart.js"></script>
+  </body>
+</html>
