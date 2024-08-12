@@ -70,14 +70,14 @@ const createPaginationButtons = (totalPages) => {
             ? totalPages
             : getGroupRange(currentPage + 10)[1];
       }
-      window.location.href = `/?page=${page}`; // 페이지 이동}
+      window.location.href = `/open-market-service/?page=${page}`; // 페이지 이동}
       startPage += 10;
       endPage += 10;
     };
 
     if (currentPage > 10) {
       $prevButton.onclick = () => {
-        window.location.href = `/?page=${currentPage - 10}`;
+        window.location.href = `/open-market-service/?page=${currentPage - 10}`;
         startPage -= 10;
         endPage -= 10;
       };
@@ -89,7 +89,7 @@ const createPaginationButtons = (totalPages) => {
     for (let i = startPage; i <= endPage; i++) {
       const $li = document.createElement("li");
       const $a = document.createElement("a");
-      $a.href = `/?page=${i}`;
+      $a.href = `/open-market-service/?page=${i}`;
       $a.textContent = i;
       $li.appendChild($a);
 

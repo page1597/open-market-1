@@ -75,7 +75,7 @@ const login = async (id, password, loginType) => {
       // token 저장
       localStorage.setItem("token", json.token);
       alert("로그인 되었습니다.");
-      window.location.href = "/";
+      window.location.href = "/open-market-service/";
 
       return true;
     } else {
