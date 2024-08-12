@@ -9,7 +9,7 @@ const addHeader = () => {
       document.querySelector("header").outerHTML = data;
 
       const script = document.createElement("script");
-      script.src = "/open-market-service/src/js/header.js";
+      script.src = "/src/js/header.js";
       document.body.appendChild(script);
     });
 };
@@ -70,14 +70,14 @@ const createPaginationButtons = (totalPages) => {
             ? totalPages
             : getGroupRange(currentPage + 10)[1];
       }
-      window.location.href = `/open-market-service/?page=${page}`; // 페이지 이동}
+      window.location.href = `/?page=${page}`; // 페이지 이동}
       startPage += 10;
       endPage += 10;
     };
 
     if (currentPage > 10) {
       $prevButton.onclick = () => {
-        window.location.href = `/open-market-service/?page=${currentPage - 10}`;
+        window.location.href = `/?page=${currentPage - 10}`;
         startPage -= 10;
         endPage -= 10;
       };
@@ -89,7 +89,7 @@ const createPaginationButtons = (totalPages) => {
     for (let i = startPage; i <= endPage; i++) {
       const $li = document.createElement("li");
       const $a = document.createElement("a");
-      $a.href = `/open-market-service/?page=${i}`;
+      $a.href = `/?page=${i}`;
       $a.textContent = i;
       $li.appendChild($a);
 
@@ -146,7 +146,7 @@ const createProductCard = (product) => {
   $li.id = product.product_id;
 
   const $productLink = document.createElement("a");
-  $productLink.href = `/open-market-service/product?id=${product.product_id}`;
+  $productLink.href = `/product?id=${product.product_id}`;
 
   const $img = document.createElement("img");
   $img.src = product.image;
@@ -156,7 +156,7 @@ const createProductCard = (product) => {
 
   const $storeName = document.createElement("p");
   const $productName = document.createElement("a");
-  $productLink.href = `/open-market-service/product?id=${product.product_id}`;
+  $productLink.href = `/product?id=${product.product_id}`;
   const $productPrice = document.createElement("p");
 
   $storeName.classList.add("store-name");
