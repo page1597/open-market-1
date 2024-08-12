@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HODU</title>
-    <link rel="stylesheet" href="./src/css/main.css" />
+    <link rel="modulepreload" href="/src/js/header.js" />
+    <link rel="stylesheet" href="/src/css/main.css" />
   </head>
   <body>
-    <header></header>
+    <header id="header"></header>
     <main>
       <h1 class="sr-only">HODU</h1>
       <div class="main-inner">
@@ -28,6 +29,15 @@
       </div>
     </main>
     <footer></footer>
-    <script src="./src/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
+    <script>
+      $(document).ready(() => {
+        $("header#header").load("header.html");
+      });
+      $(document).ready(() => {
+        $("footer").load("footer.html");
+      });
+    </script>
   </body>
 </html>

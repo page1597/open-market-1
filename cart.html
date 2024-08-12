@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>장바구니</title>
-    <link rel="stylesheet" href="./src/css/cart.css" />
+    <link rel="stylesheet" href="/src/css/cart.css" />
   </head>
   <body>
-    <header></header>
+    <header id="header"></header>
     <main>
       <h2>장바구니</h2>
       <section class="cart-products">
-        <header class="cart-product-header">
+        <header id="cart-product-header" class="cart-product-header">
           <div class="checkbox-container">
             <input type="checkbox" id="select-all" aria-label="전체 선택" />
             <label for="select-all">
@@ -101,6 +101,15 @@
       </section>
     </main>
     <footer></footer>
-    <script src="./src/js/cart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="/src/js/cart.js"></script>
+    <script>
+      $(document).ready(() => {
+        $("header#header").load("header.html");
+      });
+      $(document).ready(() => {
+        $("footer").load("footer.html");
+      });
+    </script>
   </body>
 </html>

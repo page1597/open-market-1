@@ -1,3 +1,5 @@
+const baseUrl = "https://openmarket.weniv.co.kr";
+
 const $cartButton = document.querySelector(".user-navbar .cart button");
 const $userButton = document.querySelector(".user-navbar .user button");
 const currentPage = window.location.pathname;
@@ -36,7 +38,7 @@ if (!localStorage.getItem("token")) {
   // 없을 때 로그인
   $userButton.removeEventListener("click", onOpenDropdown);
   $userButton.addEventListener("click", () => {
-    window.location.href = "/login.html";
+    window.location.href = "./login.html";
   });
   $userButton.textContent = "로그인";
 } else {
@@ -68,7 +70,7 @@ const logout = async () => {
     console.log(res);
     localStorage.removeItem("token");
     alert("로그아웃 되었습니다.");
-    window.location.href = "/";
+    window.location.href = "./";
   } catch (e) {
     console.error("로그아웃 실패", e);
   }

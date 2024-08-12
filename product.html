@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상품 정보</title>
-    <link rel="stylesheet" href="./src/css/product.css" />
+    <link rel="stylesheet" href="/src/css/product.css" />
   </head>
   <body>
-    <header></header>
+    <header id="header"></header>
     <main>
       <section class="hidden">
         <h2 class="sr-only"></h2>
@@ -28,7 +28,7 @@
             <div class="quantity-change-button">
               <button type="button" id="minus">
                 <img
-                  src="./public/assets/icon-minus-line.svg"
+                  src="/public/assets/icon-minus-line.svg"
                   alt="수량 1 줄이기"
                 />
               </button>
@@ -41,7 +41,7 @@
               />
               <button type="button" id="plus">
                 <img
-                  src="./public/assets/icon-plus-line.svg"
+                  src="/public/assets/icon-plus-line.svg"
                   alt="수량 1 늘리기"
                 />
               </button>
@@ -71,6 +71,15 @@
       </section>
     </main>
     <footer></footer>
-    <script src="./src/js/product.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="/src/js/product.js"></script>
+    <script>
+      $(document).ready(() => {
+        $("header#header").load("header.html");
+      });
+      $(document).ready(() => {
+        $("footer").load("footer.html");
+      });
+    </script>
   </body>
 </html>

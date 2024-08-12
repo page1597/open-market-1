@@ -3,30 +3,7 @@ const baseUrl = "https://openmarket.weniv.co.kr";
 let quantity = 1;
 let product = {};
 
-// 헤더 불러오기
-const addHeader = () => {
-  console.log("header.html");
-  fetch("header.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector("header").outerHTML = data;
-
-      const script = document.createElement("script");
-      script.src = "/src/js/header.js";
-      document.body.appendChild(script);
-    });
-};
-const addFooter = () => {
-  fetch("footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector("footer").outerHTML = data;
-    });
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-  addHeader();
-  addFooter();
   displayProduct();
 });
 

@@ -1,35 +1,12 @@
 const baseUrl = "https://openmarket.weniv.co.kr";
 
-// 헤더 불러오기
-const addHeader = () => {
-  console.log("header.html");
-  fetch("header.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector("header").outerHTML = data;
-
-      const script = document.createElement("script");
-      script.src = "/src/js/header.js";
-      document.body.appendChild(script);
-    });
-};
-
-const addFooter = () => {
-  fetch("footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector("footer").outerHTML = data;
-    });
-};
 // 페이지 이동 -> 해당 주소로
 document.addEventListener("DOMContentLoaded", () => {
   // document.querySelector(".user-navbar .login a").textContent = "마이페이지";
-  addHeader();
-  addFooter();
   displayProducts();
 });
 
-getGroupRange = (number) => {
+const getGroupRange = (number) => {
   const groupStart = Math.floor((number - 1) / 10) * 10 + 1;
   const groupEnd = groupStart + 9;
 
@@ -70,14 +47,14 @@ const createPaginationButtons = (totalPages) => {
             ? totalPages
             : getGroupRange(currentPage + 10)[1];
       }
-      window.location.href = `/?page=${page}`; // 페이지 이동}
+      window.location.href = `./?page=${page}`; // 페이지 이동}
       startPage += 10;
       endPage += 10;
     };
 
     if (currentPage > 10) {
       $prevButton.onclick = () => {
-        window.location.href = `/?page=${currentPage - 10}`;
+        window.location.href = `./?page=${currentPage - 10}`;
         startPage -= 10;
         endPage -= 10;
       };
@@ -89,7 +66,7 @@ const createPaginationButtons = (totalPages) => {
     for (let i = startPage; i <= endPage; i++) {
       const $li = document.createElement("li");
       const $a = document.createElement("a");
-      $a.href = `/?page=${i}`;
+      $a.href = `./?page=${i}`;
       $a.textContent = i;
       $li.appendChild($a);
 
@@ -146,7 +123,7 @@ const createProductCard = (product) => {
   $li.id = product.product_id;
 
   const $productLink = document.createElement("a");
-  $productLink.href = `/product?id=${product.product_id}`;
+  $productLink.href = `./product?id=${product.product_id}`;
 
   const $img = document.createElement("img");
   $img.src = product.image;
@@ -156,7 +133,7 @@ const createProductCard = (product) => {
 
   const $storeName = document.createElement("p");
   const $productName = document.createElement("a");
-  $productLink.href = `/product?id=${product.product_id}`;
+  $productLink.href = `./product?id=${product.product_id}`;
   const $productPrice = document.createElement("p");
 
   $storeName.classList.add("store-name");

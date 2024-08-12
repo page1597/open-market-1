@@ -1,38 +1,14 @@
+console.log("장바구니");
 const baseUrl = "https://openmarket.weniv.co.kr";
 let finalOrderProducts = [];
 
-// 헤더 불러오기
-const addHeader = () => {
-  console.log("header.html");
-  fetch("header.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector("header").outerHTML = data;
-
-      const script = document.createElement("script");
-      script.src = "/src/js/header.js";
-      document.body.appendChild(script);
-    });
-};
-// 푸터 불러오기
-const addFooter = () => {
-  fetch("footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.querySelector("footer").outerHTML = data;
-    });
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-  addHeader();
-  addFooter();
-  // 전체 선택 이벤트
-
   displayCart();
 });
 
 // "전체 선택" 체크박스 기능
 const attachSelectAllEventListener = (product) => {
+  console.log("attach select all ");
   const $selectAllCheckbox = document.querySelector("#select-all");
   $selectAllCheckbox.addEventListener("click", () => {
     const isChecked = $selectAllCheckbox.checked;
@@ -53,6 +29,7 @@ const attachSelectAllEventListener = (product) => {
 const displayCart = async () => {
   try {
     const cart = await fetchCart();
+    console.log(cart);
     if (!cart) return;
 
     const $container = document.querySelector(".cart-items-container");
