@@ -2,13 +2,14 @@ const baseUrl = "https://openmarket.weniv.co.kr";
 
 // 헤더 불러오기
 const addHeader = () => {
+  console.log("header.html");
   fetch("header.html")
     .then((response) => response.text())
     .then((data) => {
       document.querySelector("header").outerHTML = data;
 
       const script = document.createElement("script");
-      script.src = "/src/js/header.js";
+      script.src = "../js/header.js";
       document.body.appendChild(script);
     });
 };
@@ -145,7 +146,7 @@ const createProductCard = (product) => {
   $li.id = product.product_id;
 
   const $productLink = document.createElement("a");
-  $productLink.href = `/product?id=${product.product_id}`;
+  $productLink.href = `/open-market-service/product?id=${product.product_id}`;
 
   const $img = document.createElement("img");
   $img.src = product.image;
@@ -155,7 +156,7 @@ const createProductCard = (product) => {
 
   const $storeName = document.createElement("p");
   const $productName = document.createElement("a");
-  $productName.href = `/${product.product_id}`;
+  $productLink.href = `/open-market-service/product?id=${product.product_id}`;
   const $productPrice = document.createElement("p");
 
   $storeName.classList.add("store-name");
