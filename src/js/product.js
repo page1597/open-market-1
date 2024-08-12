@@ -82,7 +82,7 @@ const createProductDetailCard = (product) => {
   document.querySelector(".total-price em").textContent = formatter.format(
     product.price * quantity
   );
-  document.createElement("span").textContent = product.product_name;
+  document.querySelector("section").classList.remove("hidden");
 };
 
 // 장바구니 추가
