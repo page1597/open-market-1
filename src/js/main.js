@@ -9,7 +9,7 @@ const addHeader = () => {
       document.querySelector("header").outerHTML = data;
 
       const script = document.createElement("script");
-      script.src = "../js/header.js";
+      script.src = "/open-market-service/src/js/header.js";
       document.body.appendChild(script);
     });
 };
