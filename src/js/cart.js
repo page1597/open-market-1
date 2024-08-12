@@ -1,4 +1,6 @@
-console.log("장바구니");
+import plusIcon from "../../public/assets/icon-plus-line.svg";
+import minusIcon from "../../public/assets/icon-minus-line.svg";
+
 const baseUrl = "https://openmarket.weniv.co.kr";
 let finalOrderProducts = [];
 
@@ -94,13 +96,13 @@ const createCartItemCard = (product, quantity, cartItemId) => {
     </div>
     <div class="quantity-change-button">
       <button type="button" id="minus-${product.product_id}">
-        <img src="./public/assets/icon-minus-line.svg" alt="수량 1 줄이기" />
+        <img src="${minusIcon}" alt="수량 1 줄이기" />
       </button>
       <input disabled value="${quantity}" min="1" max="100" type="number" class="quantity-change-input" id="quantity-${
     product.product_id
   }" />
       <button type="button" id="plus-${product.product_id}">
-        <img src="./public/assets/icon-plus-line.svg" alt="수량 1 늘리기" />
+        <img src="${plusIcon}" alt="수량 1 늘리기" />
       </button>
     </div>
     <div class="total">
@@ -218,11 +220,11 @@ const createQuantityChangeModal = (product, cartItemId) => {
   <div class="modal-content">
     <div class="quantity-change-button">
       <button type="button" id="modal-minus-${product.product_id}">
-        <img src="./public/assets/icon-minus-line.svg" alt="수량 1 줄이기" />
+        <img src="${minusIcon}" alt="수량 1 줄이기" />
       </button>
       <input value="${quantity}" min="1" max="100" type="number" class="quantity-change-input" id="modal-quantity-${product.product_id}" />
       <button type="button" id="modal-plus-${product.product_id}">
-        <img src="./public/assets/icon-plus-line.svg" alt="수량 1 늘리기" />
+        <img src="${plusIcon}" alt="수량 1 늘리기" />
       </button>
     </div>
     <div class="modal-button-container">
