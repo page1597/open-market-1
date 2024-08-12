@@ -28,12 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
   displayProducts();
 });
 
-function getGroupRange(number) {
+getGroupRange = (number) => {
   const groupStart = Math.floor((number - 1) / 10) * 10 + 1;
   const groupEnd = groupStart + 9;
 
   return [groupStart, groupEnd];
-}
+};
 
 const createPaginationButtons = (totalPages) => {
   const $pagination = document.querySelector(".pagination ul");
@@ -123,7 +123,7 @@ const fetchProducts = async () => {
   }
 };
 
-const displayProducts = async function () {
+const displayProducts = async () => {
   const $productList = document.querySelector(".product-list ol");
   $productList.innerHTML = "";
 

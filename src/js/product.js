@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   displayProduct();
 });
 
-const displayProduct = async function () {
+const displayProduct = async () => {
   try {
     product = await fetchProduct();
     console.log(product);
@@ -85,10 +85,13 @@ const createProductDetailCard = (product) => {
   document.createElement("span").textContent = product.product_name;
 };
 
+// 장바구니 추가
 const addToCart = async (product) => {
   const token = localStorage.getItem("token");
   if (!token) {
     console.error("인증된 사용자가 아님. 토큰 없음");
+    alert("로그인 후 이용가능합니다.");
+    window.location.href = "./login.html";
     return;
   }
   try {
@@ -108,15 +111,21 @@ const addToCart = async (product) => {
     if (res.ok) {
       const json = await res.json();
       console.log(json);
-      alert("장바구니에 담았습니다.");
+      alert("장바구니에 추가되었습니다.");
+      if (confirm("장바구니로 이동하시겠습니까?")) {
+        window.location.href = "./cart.html";
+      }
       return json;
     } else {
       const errorJson = await res.json();
       console.error("장바구니 넣기 실패:", errorJson);
+      alert(errorJson.FAIL_message);
       return null;
     }
   } catch (error) {
     console.error("장바구니 넣기 오류:", error);
+    alert("장바구니에 추가하지 못했습니다. 관리자에게 문의하세요.");
+
     return null;
   }
 };
