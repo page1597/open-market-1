@@ -1,9 +1,10 @@
 @import url("style.css");
-
+body {
+  margin: 10vh 0 0 0;
+}
 .logo {
   display: block;
   margin: 0 auto;
-  margin-top: 10vh;
 }
 .login-container {
   display: flex;
