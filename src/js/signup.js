@@ -114,6 +114,13 @@ document.addEventListener("DOMContentLoaded", () => {
       name: $nameInput.value,
     };
 
+    const $agreeCheckbox = document.getElementById("agree-to-terms");
+
+    if (!$agreeCheckbox.checked) {
+      alert("이용약관 및 개인정보처리방침에 동의해주세요.");
+      return;
+    }
+
     onSignup(buyerUserInfo);
 
     // TODO: 판매회원가입 구현
@@ -154,7 +161,6 @@ const onSignup = async (userInfo) => {
 const checkSamePassword = () => {
   const $passwordInput = document.getElementById("password");
   const $checkPasswordInput = document.getElementById("check-password");
-  console.log($passwordInput.value, $checkPasswordInput.value);
   if ($passwordInput.value === $checkPasswordInput.value) {
     return true;
   } else {

@@ -9,6 +9,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         cart: resolve(__dirname, "cart.html"),
         login: resolve(__dirname, "login.html"),
+        signup: resolve(__dirname, "signup.html"),
         product: resolve(__dirname, "product.html"),
         footer: resolve(__dirname, "footer.html"),
       },
