@@ -204,3 +204,19 @@ input#agree-to-terms:checked + .custom-checkbox {
   background-repeat: no-repeat;
   border: 1px solid var(--primary-color);
 }
+.registration-number-container {
+  display: flex;
+  gap: 12px;
+}
+button#certification-check {
+  font-weight: 500;
+  padding: 17px 31px;
+  /* display: flex; */
+}
+.seller-input-container {
+  display: none;
+  flex-direction: column;
+}
+.seller-input-container label {
+  margin-top: 12px;
+}
