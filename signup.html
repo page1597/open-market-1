@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-    <script type="module" crossorigin src="/open-market-service/assets/signup-COnk3bYe.js"></script>
+    <script type="module" crossorigin src="/open-market-service/assets/signup-DAFzLZtU.js"></script>
     <link rel="modulepreload" crossorigin href="/open-market-service/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/open-market-service/assets/signup-DoHv8i2Q.css">
+    <link rel="stylesheet" crossorigin href="/open-market-service/assets/signup-BBP0ob0d.css">
   </head>
   <body>
     <header>
@@ -61,6 +61,27 @@
               <input id="phone-2" name="phone" type="number" maxlength="4" />
               <input id="phone-3" name="phone" type="number" maxlength="4" />
             </div>
+            <!-- <label for="registration-number">사업자 등록번호</label>
+            <input
+              id="registration-number"
+              name="registration-number"
+              type="text"
+            /> -->
+
+            <!-- 판매회원가입 -->
+            <div class="seller-input-container">
+              <label for="registration-number">사업자 등록번호</label>
+              <div class="registration-number-container">
+                <input
+                  id="registration-number"
+                  name="registration-number"
+                  type="text"
+                />
+                <button id="certification-check">인증</button>
+              </div>
+              <label for="store-name">스토어 이름</label>
+              <input id="store-name" name="store-name" type="text" />
+            </div>
           </div>
           <div class="terms-and-conditions">
             <label class="checkbox-label">
@@ -73,6 +94,7 @@
               </p>
             </label>
           </div>
+
           <button class="register" id="register" type="submit">가입하기</button>
         </form>
       </section>
